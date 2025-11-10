@@ -1,11 +1,17 @@
-# esp32-project
-# Andika Nugraha-3223600010
-Matakuliah Sistem Embedded 
-Konsep Multitasking dan Dual-Core Processing Mikrokontroler ESP32-S3
-Andika Nugraha - 3223600010 - 3 D4 Teknik Komputer A
+# ESP32-S3 Multitasking Project  
+**Nama:** Andika Nugraha  
+**NIM:** 3223600010  
+**Kelas:** 3 D4 Teknik Komputer A  
+**Mata Kuliah:** Sistem Embedded  
 
-Pin yang di gunakan
-____________________________________________________
+## 🧠 Konsep Proyek  
+Eksperimen ini mengimplementasikan **multitasking dan dual-core processing** pada mikrokontroler **ESP32-S3** menggunakan FreeRTOS.  
+Tujuannya untuk menguji performa dan kestabilan berbagai periferal saat dijalankan di Core 0 dan Core 1.
+
+---
+
+## ⚙️ Pinout dan Komponen
+
 | Komponen           | Pin ESP32-S3 | Keterangan   |
 | ------------------ | ------------ | ------------ |
 | LED                | 15           | Output       |
@@ -23,87 +29,101 @@ ____________________________________________________
 | Stepper B+         | 38           | Output coil  |
 | Stepper A+         | 39           | Output coil  |
 | Stepper A-         | 40           | Output coil  |
-____________________________________________________
 
-Atau bisa lihat diagram.json WokWi
+> Diagram lengkap tersedia pada file `diagram.json` di WokWi.
 
-Tujuan Percobaan
--Menguji fungsi masing-masing peripheral pada ESP32-S3
--Mengamati perbedaan performa task yang dijalankan di Core 0 dan Core 1.
--Mengetahui kestabilan akses I/O, PWM, ADC, dan I²C pada lingkungan multitasking.
+---
 
-# Langkah Percobaan per Peripheral
-1.LED Test
-Tujuan: Menguji output digital.
-Jalankan led_test.ino
-LED di GPIO15 berkedip setiap 500 ms.
-Jalankan di Core 0, lalu ubah ke Core 1.
-Bandingkan kestabilan waktu kedip.
+## 🎯 Tujuan Percobaan
 
-2️.Buzzer Test
+- Menguji fungsi masing-masing peripheral pada ESP32-S3.  
+- Mengamati perbedaan performa task di Core 0 dan Core 1.  
+- Mengetahui kestabilan akses I/O, PWM, ADC, dan I²C dalam lingkungan multitasking.
 
-Tujuan: Menguji output digital (bunyi).
-Jalankan buzzer_test.ino
-Buzzer aktif selama 300 ms tiap 1 detik.
-Bandingkan nada atau timing antar core.
+---
 
-3️.Push Button Test
-Tujuan: Menguji input digital dengan pull-up.
-Jalankan button.ino
-Tekan tombol 1 (GPIO18) atau 2 (GPIO19).
-LED GPIO15 menyala saat tombol ditekan.
-Ubah core eksekusi task dan amati respon.
+## 🧩 Langkah Percobaan per Peripheral
 
-4️.Potensiometer Test
-Tujuan: Membaca nilai analog.
-Jalankan potentio.ino
-Putar knob potensiometer.
-Nilai ADC tampil di Serial Monitor (0–4095).
-Bandingkan hasil pembacaan di Core 0 dan 1.
+### 1. LED Test
+**Tujuan:** Menguji output digital.  
+**File:** `led_test.ino`  
+- LED di GPIO15 berkedip setiap 500 ms.  
+- Jalankan di Core 0 lalu ubah ke Core 1.  
+- Bandingkan kestabilan waktu kedip.
 
-5️.OLED Display Test
-Tujuan: Menampilkan teks pada OLED SSD1306.
-Jalankan oled.ino
-Teks OLED Task running on Core: tampil di layar.
-Ubah core dan amati apakah tampilan tetap stabil.
+---
 
-6️.Rotary Encoder Test
-Tujuan: Membaca arah dan langkah putaran.
-Jalankan encoder.ino
-Putar knob searah atau berlawanan jarum jam.
-Nilai counter bertambah/berkurang di Serial Monitor.
-Bandingkan kecepatan respon antar core.
+### 2. Buzzer Test
+**Tujuan:** Menguji output digital (bunyi).  
+**File:** `buzzer_test.ino`  
+- Buzzer aktif 300 ms tiap 1 detik.  
+- Bandingkan timing antar core.
 
-7️.Servo Test
-Tujuan: Menguji kontrol PWM.
-Jalankan servo.ino
-Servo bergerak 0° → 180° → 0° berulang.
-Jalankan di Core 0 lalu di Core 1.
-Catat kestabilan sudut dan getaran.
+---
 
-8️.Stepper Motor Test
-Tujuan: Menguji urutan coil stepper.
-Jalankan stepper.ino
-Motor berputar CW lalu CCW.
-Bandingkan kelancaran di Core 0 dan Core 1.
+### 3. Push Button Test
+**Tujuan:** Menguji input digital dengan pull-up.  
+**File:** `button.ino`  
+- Tekan tombol 1 (GPIO18) atau 2 (GPIO19).  
+- LED GPIO15 menyala saat tombol ditekan.  
+- Ubah core task dan amati respon.
 
+---
 
-# Penjelasan Fungsi xTaskCreatePinnedToCore()
-Fungsi ini adalah bagian penting dari FreeRTOS yang digunakan untuk membuat task baru dan menentukan core mana yang akan menjalankannya.
-xTaskCreatePinnedToCore(function_name,task_name,stack_size,task_parameter,priority,task_handle,core_ID);
+### 4. Potensiometer Test
+**Tujuan:** Membaca nilai analog.  
+**File:** `potentio.ino`  
+- Putar knob potensiometer.  
+- Nilai ADC (0–4095) muncul di Serial Monitor.  
+- Bandingkan pembacaan di Core 0 dan Core 1.
 
+---
 
-Contoh : xTaskCreatePinnedToCore(taskLED, "taskLED_Core0", 1000, NULL, 1, NULL, 0);
+### 5. OLED Display Test
+**Tujuan:** Menampilkan teks pada OLED SSD1306.  
+**File:** `oled.ino`  
+- Menampilkan teks *“OLED Task running on Core ...”* di layar.  
+- Coba di Core 0 dan Core 1, amati kestabilannya.
 
+---
 
-# Perbedaan Core 0 dan Core 1
-| Core       | Fungsi Utama                            | Keterangan                                                  |
-| ---------- | --------------------------------------- | ----------------------------------------------------------- |
-| **Core 0** | Sistem, Wi-Fi, Bluetooth, task tambahan | Dapat digunakan untuk tugas rutin atau proses berat         |
-| **Core 1** | Program utama (Arduino loop, setup)     | Biasanya digunakan untuk task utama seperti UI, sensor      |
+### 6. Rotary Encoder Test
+**Tujuan:** Membaca arah dan langkah putaran.  
+**File:** `encoder.ino`  
+- Putar knob searah atau berlawanan jarum jam.  
+- Nilai counter tampil di Serial Monitor.  
+- Uji kecepatan respon antar core.
 
-# Kesimpulan
+---
 
-Dengan FreeRTOS, ESP32-S3 dapat menjalankan beberapa proses (task) secara bersamaan di dua core.
-Fungsi xTaskCreatePinnedToCore() memungkinkan pembagian kerja antar-core secara manual.
-Pembagian tugas yang baik (misalnya LED di Core 0 dan sensor di Core 1) dapat meningkatkan performa sistem dan membuat respon lebih cepat.
+### 7. Servo Test
+**Tujuan:** Menguji kontrol PWM.  
+**File:** `servo.ino`  
+- Servo bergerak 0° → 180° → 0° berulang.  
+- Jalankan di Core 0 dan Core 1, catat kestabilannya.
+
+---
+
+### 8. Stepper Motor Test
+**Tujuan:** Menguji urutan coil stepper.  
+**File:** `stepper.ino`  
+- Motor berputar searah dan berlawanan jarum jam.  
+- Bandingkan kelancaran di Core 0 dan Core 1.
+
+---
+
+## ⚙️ Fungsi `xTaskCreatePinnedToCore()`
+
+Fungsi ini merupakan bagian dari **FreeRTOS** yang digunakan untuk membuat *task baru* dan menentukan core mana yang akan menjalankannya.
+
+```cpp
+xTaskCreatePinnedToCore(
+  function_name,  // Fungsi task
+  task_name,      // Nama task
+  stack_size,     // Ukuran stack
+  task_parameter, // Parameter task
+  priority,       // Prioritas
+  task_handle,    // Handle task
+  core_ID         // Core yang digunakan (0 atau 1)
+);
+
