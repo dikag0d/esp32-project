@@ -4,13 +4,13 @@
 **Kelas:** 3 D4 Teknik Komputer A  
 **Mata Kuliah:** Sistem Embedded  
 
-## 🧠 Konsep Proyek  
+## Konsep Proyek  
 Eksperimen ini mengimplementasikan **multitasking dan dual-core processing** pada mikrokontroler **ESP32-S3** menggunakan FreeRTOS.  
 Tujuannya untuk menguji performa dan kestabilan berbagai periferal saat dijalankan di Core 0 dan Core 1.
 
 ---
 
-## ⚙️ Pinout dan Komponen
+## Pinout dan Komponen
 
 | Komponen           | Pin ESP32-S3 | Keterangan   |
 | ------------------ | ------------ | ------------ |
@@ -34,7 +34,7 @@ Tujuannya untuk menguji performa dan kestabilan berbagai periferal saat dijalank
 
 ---
 
-## 🎯 Tujuan Percobaan
+##  Tujuan Percobaan
 
 - Menguji fungsi masing-masing peripheral pada ESP32-S3.  
 - Mengamati perbedaan performa task di Core 0 dan Core 1.  
@@ -42,7 +42,7 @@ Tujuannya untuk menguji performa dan kestabilan berbagai periferal saat dijalank
 
 ---
 
-## 🧩 Langkah Percobaan per Peripheral
+## Langkah Percobaan per Peripheral
 
 ### 1. LED Test
 **Tujuan:** Menguji output digital.  
@@ -55,7 +55,7 @@ Tujuannya untuk menguji performa dan kestabilan berbagai periferal saat dijalank
 
 ### 2. Buzzer Test
 **Tujuan:** Menguji output digital (bunyi).  
-**File:** `buzzer_test.ino`  
+**File:** `buzzer.ino`  
 - Buzzer aktif 300 ms tiap 1 detik.  
 - Bandingkan timing antar core.
 
