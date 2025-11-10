@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "author": "dikanugraha",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-s3-devkitc-1", "id": "esp32", "top": -10, "left": 180 },
+
+    { "type": "wokwi-led", "id": "led1", "top": -60, "left": 60, "attrs": { "color": "red" } },
+    { "type": "wokwi-buzzer", "id": "buzzer1", "top": -60, "left": 280 },
+
+    { "type": "wokwi-pushbutton", "id": "button1", "top": 80, "left": 40, "attrs": { "color": "green" } },
+    { "type": "wokwi-pushbutton", "id": "button2", "top": 80, "left": 100, "attrs": { "color": "blue" } },
+
+    { "type": "wokwi-potentiometer", "id": "pot1", "top": 150, "left": 60 },
+    { "type": "wokwi-oled", "id": "oled1", "top": -120, "left": 320, "attrs": { "width": "128", "height": "64" } },
+
+    { "type": "wokwi-rotary-encoder", "id": "encoder1", "top": 180, "left": 250 },
+    { "type": "wokwi-servo", "id": "servo1", "top": 60, "left": 360 },
+
+    { "type": "wokwi-stepper-motor", "id": "stepper1", "top": 220, "left": 420 }
+  ],
+  "connections": [
+    ["esp32:15", "led1:A", "green", ["v0"]],
+    ["led1:C", "esp32:GND", "black", ["v0"]],
+
+    ["esp32:4", "buzzer1:1", "red", ["v0"]],
+    ["buzzer1:2", "esp32:GND", "black", ["v0"]],
+
+    ["esp32:18", "button1:1.l", "orange", ["v0"]],
+    ["button1:2.r", "esp32:GND", "black", ["v0"]],
+    ["esp32:19", "button2:1.l", "blue", ["v0"]],
+    ["button2:2.r", "esp32:GND", "black", ["v0"]],
+
+    ["esp32:36", "pot1:SIG", "purple", ["v0"]],
+    ["pot1:GND", "esp32:GND", "black", ["v0"]],
+    ["pot1:VCC", "esp32:3V3", "red", ["v0"]],
+
+    ["esp32:8", "oled1:SDA", "green", ["v0"]],
+    ["esp32:9", "oled1:SCL", "yellow", ["v0"]],
+    ["oled1:VCC", "esp32:3V3", "red", ["v0"]],
+    ["oled1:GND", "esp32:GND", "black", ["v0"]],
+
+    ["esp32:10", "encoder1:CLK", "blue", ["v0"]],
+    ["esp32:11", "encoder1:DT", "purple", ["v0"]],
+    ["esp32:12", "encoder1:SW", "orange", ["v0"]],
+    ["encoder1:GND", "esp32:GND", "black", ["v0"]],
+    ["encoder1:VCC", "esp32:3V3", "red", ["v0"]],
+
+    ["esp32:42", "servo1:PWM", "green", ["v0"]],
+    ["servo1:GND", "esp32:GND", "black", ["v0"]],
+    ["servo1:V+", "esp32:5V", "red", ["v0"]],
+
+    ["esp32:37", "stepper1:B-", "red", ["v0"]],
+    ["esp32:38", "stepper1:B+", "orange", ["v0"]],
+    ["esp32:39", "stepper1:A+", "yellow", ["v0"]],
+    ["esp32:40", "stepper1:A-", "green", ["v0"]],
+    ["stepper1:VCC", "esp32:5V", "red", ["v0"]],
+    ["stepper1:GND", "esp32:GND", "black", ["v0"]]
+  ]
+}
